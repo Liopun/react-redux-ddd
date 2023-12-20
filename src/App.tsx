@@ -8,9 +8,11 @@ import ActivateAccountPage from './pages/activateAccount'
 import IndexPage from './pages/index'
 import './App.css'
 import NotFoundPage from './pages/notFound';
+import OAuth2CBPage from './pages/oauth2CB';
 import ClaimUsernamePage from './pages/claimUsername';
 import AuthenticatedRoute from './shared/infra/router/AuthenticatedRoute';
 import UnauthenticatedRoute from './shared/infra/router/UnauthenticatedRoute';
+import { OAuth2Provider } from './shared/constants/oauth2';
 
 const theme = createTheme({
   palette: {
@@ -34,21 +36,37 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path='*' element={<NotFoundPage />} />
-            {/* <Route
+            <Route
               path='/home'
               element={
                 <AuthenticatedRoute>
-                  <IndexPage history={history} />
+                  <IndexPage />
                 </AuthenticatedRoute>
               } 
-            /> */}
+            />
+            <Route
+              path='/oauth2/github/callback'
+              element={
+                <UnauthenticatedRoute>
+                  <OAuth2CBPage history={history} provider={OAuth2Provider.GITHUB} />
+                </UnauthenticatedRoute>
+              } 
+            />
+            <Route
+              path='/oauth2/google/callback'
+              element={
+                <UnauthenticatedRoute>
+                  <OAuth2CBPage history={history} provider={OAuth2Provider.GOOGLE} />
+                </UnauthenticatedRoute>
+              } 
+            />
             <Route
               path='/signin'
               element={
                 <UnauthenticatedRoute>
                   <SigninPage history={history} />
                 </UnauthenticatedRoute>
-              } 
+              }
             />
             <Route
               path='/signup'

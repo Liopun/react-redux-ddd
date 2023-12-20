@@ -24,7 +24,7 @@ class ActivateAccountPage extends React.Component<ActivateAccountProps> {
     afterSuccessfulActivation (prevProps: ActivateAccountProps) {
         const currentProps: ActivateAccountProps = this.props;
         if (currentProps.users.isActivatingAccountSuccess && !prevProps.users.isActivatingAccountSuccess) {
-          setTimeout(() => { this.props.history.push('/username', history)}, 1000)
+          setTimeout(() => { this.props.history.push('/home', history)}, 1000)
           return toast.success(`${currentProps.users.message}`, {
             position: 'top-center',
             hideProgressBar: true,

@@ -8,6 +8,7 @@ import { Layout } from '../shared/layout';
 import Signin from '../modules/users/components/Signin';
 import usersOperators from '../modules/users/redux/operators'
 import withSigninHandling from '../modules/users/hocs/withSigninHandlers';
+import OAuthButtons from '../modules/users/components/Common/Buttons/OAuth';
 
 interface SigninPageProps extends IUserOperators {
     users: UserState
@@ -23,7 +24,11 @@ class SigninPage extends React.Component<SigninPageProps> {
     render () {
         return (
             <Layout>
-                <Signin signin={this.props.signin} />
+                <Signin
+                    signin={this.props.signin}
+                >
+                    <OAuthButtons oauth2GithubSignin={this.props.oauth2Github} oauth2GoogleSignin={this.props.oauth2Google} />
+                </Signin>
             </Layout>
         )
     }

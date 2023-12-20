@@ -5,13 +5,30 @@ export interface UserState {
   user: User | {};
   tags: Tag[];
   isAuthenticated: boolean;
+
   isFetchingUser: boolean;
   isFetchingUserSuccess: boolean;
   isFetchingUserFailure: boolean;
 
-  isSigningIn: boolean,
-  isSigningInSuccess: boolean,
-  isSigningInFailure: boolean,
+  isOauth2Github: boolean;
+  isOauth2GithubSuccess: boolean;
+  isOauth2GithubFailure: boolean;
+
+  isOauth2Google: boolean;
+  isOauth2GoogleSuccess: boolean;
+  isOauth2GoogleFailure: boolean;
+
+  isOauth2GithubCB: boolean;
+  isOauth2GithubCBSuccess: boolean;
+  isOauth2GithubCBFailure: boolean;
+
+  isOauth2GoogleCB: boolean;
+  isOauth2GoogleCBSuccess: boolean;
+  isOauth2GoogleCBFailure: boolean;
+
+  isSigningIn: boolean;
+  isSigningInSuccess: boolean;
+  isSigningInFailure: boolean;
 
   isSigningOut: boolean;
   isSigningOutSuccess: boolean;
@@ -41,9 +58,26 @@ const initialUserState: UserState = {
   user: {},
   tags: [],
   isAuthenticated: false,
+
   isFetchingUser: false,
   isFetchingUserSuccess: false,
   isFetchingUserFailure: false,
+
+  isOauth2Github: false,
+  isOauth2GithubSuccess: false,
+  isOauth2GithubFailure: false,
+
+  isOauth2Google: false,
+  isOauth2GoogleSuccess: false,
+  isOauth2GoogleFailure: false,
+
+  isOauth2GithubCB: false,
+  isOauth2GithubCBSuccess: false,
+  isOauth2GithubCBFailure: false,
+
+  isOauth2GoogleCB: false,
+  isOauth2GoogleCBSuccess: false,
+  isOauth2GoogleCBFailure: false,
 
   isSigningIn: false,
   isSigningInSuccess: false,

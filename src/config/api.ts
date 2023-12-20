@@ -5,7 +5,7 @@ const devApiConfig = {
 }
 
 const prodApiConfig = {
-    baseUrl: 'https://inspodev.io/api/v1'
+    baseUrl: 'https://website.domain/api/v1'
 }
 
 const apiCfg = isProduction ? prodApiConfig : devApiConfig;

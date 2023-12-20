@@ -1,12 +1,12 @@
 export interface User {
     id: string;
     username: string;
-    country: string;
-    industry: string;
-    institution: string;
+    location: string;
+    email: string;
+    firstname: string;
+    lastname: string;
     bio: string;
-    followersCount: number;
-    followeesCount: number;
+    avatar: string;
+    socialLinks: string[];
     isActivated: boolean;
-    isVerified: boolean;
 }

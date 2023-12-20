@@ -6,6 +6,7 @@ import { UserState } from '../../../modules/users/redux/states';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import usersOperators from '../../../modules/users/redux/operators'
+import Loader from '../../components/Loader';
 
 type UnauthenticatedRouteProps = {
   users: UserState;
@@ -13,11 +14,9 @@ type UnauthenticatedRouteProps = {
 } & PropsWithChildren;
 
 const UnauthenticatedRoute: React.FC<UnauthenticatedRouteProps> = ({ users, children: Children }) => {
-  const isSignedIn = users.isAuthenticated;
-
   return (
-    !isSignedIn ? (
-      Children
+    !users.isAuthenticated ? (
+      users.isFetchingUser ? <Loader /> : Children
     ) : (
       <Navigate to="/home" replace />
     )

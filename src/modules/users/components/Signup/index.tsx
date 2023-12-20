@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { Container, Grid, Box, Typography, Stack } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { FC } from 'react';
@@ -14,9 +14,10 @@ import { ISignup, signupSchema } from '../../models/auth';
 
 interface SignupProps {
     signup: (email: string, password: string) => void
+    children: ReactElement;
 };
 
-const Signup: FC<SignupProps> = ({ signup }) => {
+const Signup: FC<SignupProps> = ({ signup, children: OAuthButtons }) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     // initial values
     const defaultValues: ISignup = {
@@ -115,19 +116,7 @@ const Signup: FC<SignupProps> = ({ signup }) => {
                                         {' '}
                                         or sign up with:{' '}
                                     </Typography>
-                                    <Box
-                                        display='flex'
-                                        flexDirection='column'
-                                        sx={{ paddingLeft: { sm: '3rem' }, rowGap: '1rem' }}>
-                                        <OauthMuiLink href=''>
-                                            <img src={GoogleLogo} alt='google logo' style={{ height: '1.5rem' }} />
-                                            Google
-                                        </OauthMuiLink>
-                                        <OauthMuiLink href=''>
-                                            <img src={GithubLogo} alt='github logo' style={{ height: '1.5rem' }} />
-                                            GitHub
-                                        </OauthMuiLink>
-                                    </Box>
+                                    { OAuthButtons }
                                 </Grid>
                             </Grid>
                             <Grid container justifyContent='center'>

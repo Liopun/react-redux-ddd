@@ -1,5 +1,5 @@
 const siteMeta = {
-    title: 'Ibaze | Navigate your career growth with a strong community'
+    title: 'React-Redux-DDD | Clean Architecture'
 }
 
 export { siteMeta }

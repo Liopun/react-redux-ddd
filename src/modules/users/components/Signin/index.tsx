@@ -1,22 +1,21 @@
 import { Container, Grid, Box, Typography, Stack, FormControlLabel, Checkbox } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import { FC, useState } from 'react';
+import { FC, ReactElement, useState } from 'react';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ToastContainer } from 'react-toastify';
 import { FormInput } from '../../../../shared/components/Controls';
-import { LinkItem, OauthMuiLink } from '../../../../shared/components/Controls';
-import GoogleLogo from '../../../../assets/google.svg';
-import GithubLogo from '../../../../assets/github.svg';
+import { LinkItem } from '../../../../shared/components/Controls';
 import Logo from '../../../../assets/logo.png';
 import 'react-toastify/dist/ReactToastify.css';
 import { ISignin, signinSchema } from '../../models/auth';
 
 interface SigninProps {
     signin: (username: string, password: string) => void
+    children: ReactElement;
 };
 
-const Signin: FC<SigninProps> = ({ signin }) => {
+const Signin: FC<SigninProps> = ({ signin, children: OAuthButtons }) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     // initial values
     const defaultValues: ISignin = {
@@ -129,19 +128,7 @@ const Signin: FC<SigninProps> = ({ signin }) => {
                                         {' '}
                                         or sign in with:{' '}
                                     </Typography>
-                                    <Box
-                                        display='flex'
-                                        flexDirection='column'
-                                        sx={{ paddingLeft: { sm: '3rem' }, rowGap: '1rem' }}>
-                                        <OauthMuiLink href=''>
-                                            <img src={GoogleLogo} alt='google logo' style={{ height: '1.5rem' }} />
-                                            Google
-                                        </OauthMuiLink>
-                                        <OauthMuiLink href=''>
-                                            <img src={GithubLogo} alt='github logo' style={{ height: '1.5rem' }} />
-                                            GitHub
-                                        </OauthMuiLink>
-                                    </Box>
+                                    { OAuthButtons }
                                 </Grid>
                             </Grid>
                             <Grid container justifyContent='center'>

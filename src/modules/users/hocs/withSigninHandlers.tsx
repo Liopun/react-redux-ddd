@@ -4,10 +4,12 @@ import { Bounce, toast } from 'react-toastify';
 import { UserState } from '../redux/states';
 import { IUserOperators } from '../redux/operators';
 import { toastError, toastSuccess } from '../../../shared/utils/ToastUtil';
+import { OAuth2Provider } from '../../../shared/constants/oauth2';
 
 interface withSigninHandlingProps extends IUserOperators {
-  users: UserState
+  users: UserState;
   history: BrowserHistory;
+  provider?: OAuth2Provider;
 }
 
 const withSigninHandling = (WrappedComponent: any) => {
@@ -23,6 +25,7 @@ const withSigninHandling = (WrappedComponent: any) => {
     afterSuccessfulSignin (prevProps: withSigninHandlingProps) {
       const currentProps: withSigninHandlingProps = this.props;
       if (currentProps.users.isSigningInSuccess && !prevProps.users.isSigningInSuccess) {
+        alert("Noe")
         toastSuccess("Signed in!")
         setTimeout(() => { this.props.history.push('/home', history)}, 0)
       }

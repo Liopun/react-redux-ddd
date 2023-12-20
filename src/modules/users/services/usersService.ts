@@ -7,6 +7,10 @@ import { User } from "../models/user";
 
 export interface IUsersService {
     getCurrentUserProfile (): Promise<User>;
+    oauth2Github (): Promise<APIResponse<string>>;
+    oauth2Google (): Promise<APIResponse<string>>;
+    oauth2GithubCB (code: string, state: string): Promise<APIResponse<void>>;
+    oauth2GoogleCB (code: string, state: string): Promise<APIResponse<void>>;
     signUp (email: string, password: string): Promise<APIResponse<string>>;
     signIn (username: string, password: string): Promise<APIResponse<void>>;
     signOut (): Promise<APIResponse<void>>;
@@ -18,8 +22,51 @@ export interface IUsersService {
 export class UsersService extends BaseAPI implements IUsersService {
     async getCurrentUserProfile (): Promise<User> {
         const response = await this.get('/users/profile', null);
-        console.debug("******", response.data.data)
         return response.data.data as User;
+    }
+
+    async oauth2Github (): Promise<APIResponse<string>> {
+        try {
+            const response = await this.get('/users/oauth2/github', null)
+
+            return right(Result.ok<string>(response.data.data));
+        } catch (err) {
+            const error = err as AxiosError
+            return left(error.response ? (error.response.data as { message: string }).message : "Connection failed")
+        }
+    }
+
+    async oauth2Google (): Promise<APIResponse<string>> {
+        try {
+            const response = await this.get('/users/oauth2/google', null)
+
+            return right(Result.ok<string>(response.data.data));
+        } catch (err) {
+            const error = err as AxiosError
+            return left(error.response ? (error.response.data as { message: string }).message : "Connection failed")
+        }
+    }
+
+    async oauth2GithubCB (code: string, state: string): Promise<APIResponse<void>> {
+        try {
+            await this.get(`/users/oauth2/github/callback?code=${encodeURIComponent(code)}&state=${encodeURIComponent(state)}`, null)
+
+            return right(Result.ok<void>());
+        } catch (err) {
+            const error = err as AxiosError
+            return left(error.response ? (error.response.data as { message: string }).message : "Connection failed")
+        }
+    }
+
+    async oauth2GoogleCB (code: string, state: string): Promise<APIResponse<void>> {
+        try {
+            await this.get(`/users/oauth2/google/callback?code=${encodeURIComponent(code)}&state=${encodeURIComponent(state)}`, null)
+
+            return right(Result.ok<void>());
+        } catch (err) {
+            const error = err as AxiosError
+            return left(error.response ? (error.response.data as { message: string }).message : "Connection failed")
+        }
     }
 
     public async signOut (): Promise<APIResponse<void>> {

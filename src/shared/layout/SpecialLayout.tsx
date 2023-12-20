@@ -8,13 +8,9 @@ import "./styles.css"
 import { siteMeta } from '../../config/siteMeta';
 import withAllServices from '../../modules/users/hocs/withAllServices';
 import { UsersService } from '../../modules/users/services/usersService';
-import { TagsService } from '../../modules/posts/services/tagsService';
-import { PostsService } from '../../modules/posts/services/postsService';
 
 interface SpecialLayoutProps {
   usersService: UsersService;
-  tagsService: TagsService;
-  postsService: PostsService;
 }
 
 class Layout extends React.Component<React.PropsWithChildren<SpecialLayoutProps>> {

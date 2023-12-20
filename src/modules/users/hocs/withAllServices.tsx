@@ -1,6 +1,5 @@
 import React from 'react';
 import { usersService } from '../services';
-import { postsService, tagsService } from '../../posts/services';
 
 const withAllServices = (WrappedComponent: any) => {
   class HOC extends React.Component {
@@ -9,8 +8,6 @@ const withAllServices = (WrappedComponent: any) => {
         <WrappedComponent
           {...this.props}
           usersService={usersService}
-          tagsService={tagsService}
-          postsService={postsService}
         />
       );
     }
